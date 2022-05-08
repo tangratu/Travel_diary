@@ -15,7 +15,7 @@ void Date::vali_date(const char* year, const char* month, const char* day)
 	if (year_n < 1000 || year_n > 9999) {
 		assert("Invalid year");
 	}
-
+	//look into validation
 	switch (month_n) {
 	case 1: {
 		if (day_n < 1 || day_n>31) { assert("Invalid day"); }
