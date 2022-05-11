@@ -141,12 +141,14 @@
   <ItemGroup>
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Format.cpp" />
+    <ClCompile Include="Journey.cpp" />
     <ClCompile Include="Picture.cpp" />
     <ClCompile Include="Travel_diary.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Date.h" />
+    <ClInclude Include="Journey.h" />
     <ClInclude Include="Picture.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>

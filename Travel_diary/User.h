@@ -14,6 +14,7 @@ public:
 	User();
 	User(const char* name1, const char* pass1, const char* email1);
 	~User();
+	User& operator =(const User& other);
 	friend std::ostream& operator<<(std::ostream& os, const User& object);
 	friend std::istream& operator>>(std::istream& is, User& object);
 };

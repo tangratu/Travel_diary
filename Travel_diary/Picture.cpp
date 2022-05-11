@@ -24,6 +24,19 @@ Picture::~Picture()
 	delete[] name;
 }
 
+Picture& Picture::operator=(const Picture& other)
+{
+	if (this != &other) {
+		delete[] name;
+		size = other.size;
+		format = other.format;
+		name = new (std::nothrow)char[size + 1];
+		assert(name);
+		strcpy(name, other.name);
+	}
+	return *this;
+}
+
 std::ostream& operator<<(std::ostream& os, const Picture& object)
 {
 	os << object.name << '.';

@@ -14,6 +14,7 @@ public:
 	Date(const Date& other);
 	bool operator <(const Date& other) const;
 	bool operator >(const Date& other) const;
+	Date& operator =(const Date& other);
 	friend std::ostream& operator <<(std::ostream& os, const Date& object);
 	friend std::istream& operator >>(std::istream& is,  Date& object);
 };

@@ -122,6 +122,16 @@ bool Date::operator>(const Date& other) const
 	return (year1 > year2) || (year1 == year2 && month1 > month2) || (year1 == year2 && month1 == month2 && day1 > day2);
 }
 
+Date& Date::operator=(const Date& other)
+{
+	if (this != &other) {
+		strcpy(year, other.year);
+		strcpy(month, other.month);
+		strcpy(day, other.day);
+	}
+	return *this;
+}
+
 std::ostream& operator<<(std::ostream& os, const Date& object)
 {
 	os << object.year << '-' << object.month << '-' << object.day;

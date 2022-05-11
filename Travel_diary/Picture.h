@@ -11,6 +11,7 @@ public:
 	Picture();
 	Picture(const char* name1,  Format::type format1);
 	~Picture();
+	Picture& operator =(const Picture& other);
 	friend std::ostream& operator <<(std::ostream& os, const Picture& object);
 	friend std::istream& operator >>(std::istream& is, Picture& object);
 };

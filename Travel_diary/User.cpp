@@ -39,6 +39,26 @@ User::~User()
 	delete[] email;
 }
 
+User& User::operator=(const User& other)
+{
+	if (this != &other) {
+		delete[] name,
+		delete[] pass;
+		delete[] email;
+		name_s = other.name_s; pass_s = other.pass_s; email_s = other.email_s;
+		name = new (std::nothrow) char[name_s + 1];
+		assert(name);
+		strcpy(name, other.name);
+		pass = new (std::nothrow) char[pass_s + 1];
+		assert(pass);
+		strcpy(pass, other.pass);
+		email = new (std::nothrow) char[email_s + 1];
+		assert(email);
+		strcpy(email, other.email);
+	}
+	return *this;
+}
+
 std::ostream& operator<<(std::ostream& os, const User& object)
 {
 	os << object.name;
