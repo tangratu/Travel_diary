@@ -3,11 +3,18 @@
 #include <cassert>
 #include <iostream>
 #include "Format.cpp"
+/*! A class for handling pictures. Has fields for the name of the picture, the size of the name and the format
+* Also contains a method to check if the name contains invalid characters.
+*/
 class Picture {
 private:
+	//! Dynamically allocated char array to store the picture name
 	char* name;
-	size_t size;	
+	//! Stores the size of the dynamic char array
+	size_t size;
+	//! Stores the format of the image which is displayed with a . after the image
 	Format::type format;
+	//! Checks if the name has invalid characters and throws an exception of it does
 	void check_chars();
 public:
 	Picture();

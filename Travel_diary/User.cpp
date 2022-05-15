@@ -1,5 +1,5 @@
 #include "User.h"
-
+//! Checks each char in the array to confirm it is not an invalid char
 void User::check_chars()
 {
 	for (size_t i = 0; i < name_s; i++)
@@ -10,12 +10,12 @@ void User::check_chars()
 		}
 	}
 }
-
+//! A getter used to gain access to the private name field
 const char* User::getName()
 {
 	return this->name;
 }
-
+//! Default constructor to handle dynamic array initialisation
 User::User()
 {
 	name_s = 1;
@@ -31,7 +31,7 @@ User::User()
 	strcpy(pass, "0");
 	strcpy(email, "0");
 }
-
+//! Paramater constructor for the class
 User::User(const char* name1, const char* pass1, const char* email1)
 {
 	
@@ -49,14 +49,14 @@ User::User(const char* name1, const char* pass1, const char* email1)
 	strcpy(pass, pass1);
 	strcpy(email, email1);
 }
-
+//! Destructor to deallocate dynamic memory
 User::~User()
 {
 	delete[] name;
 	delete[] pass;
 	delete[] email;
 }
-
+//! Operator use to copy the values of one user object to another, also handles memory allocation
 User& User::operator=(const User& other)
 {
 	if (this != &other) {
@@ -76,13 +76,13 @@ User& User::operator=(const User& other)
 	}
 	return *this;
 }
-
+//! Outputs the username, password and email each on a new line
 std::ostream& operator<<(std::ostream& os, const User& object)
 {
 	os << object.name << std::endl << object.pass << std::endl << object.email;
 	return os;
 }
-
+//! Takes three lines of input in the order of: username, password and email and turns them into a user object
 std::istream& operator>>(std::istream& is, User& object)
 {
 	delete[] object.name;

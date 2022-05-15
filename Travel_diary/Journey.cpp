@@ -1,5 +1,5 @@
 #include "Journey.h"
-
+//! Default constructor to initialize the dynamic arrays
 Journey::Journey() : dest_s(1), grade(1), pics_s(1)
 {
 	
@@ -10,7 +10,7 @@ Journey::Journey() : dest_s(1), grade(1), pics_s(1)
 	pics = new (std::nothrow) Picture[pics_s];
 	assert(pics);
 }
-
+//! A parameter constructor incase a journey object has to constructed from information read from a user's database
 Journey::Journey( const char* dest1, const Date& sdate1, const Date& edate1, int grade1, const char* comment1, const Picture* pics1, size_t pics1_s) {
 	
 	
@@ -32,13 +32,13 @@ Journey::Journey( const char* dest1, const Date& sdate1, const Date& edate1, int
 }
 
 
-
+//! Destructor to deallocate dynamic memory
 Journey::~Journey()
 {
 	delete[] dest;
 	delete[] pics;
 }
-
+//! For outputting the information to user's databases in the order of: destination, start date, end date, grade, comment , amount of pictures, name of each picture and each output is on a new line
 std::ostream& operator<<(std::ostream& os, const Journey& obj)
 {
 	
@@ -54,7 +54,7 @@ std::ostream& operator<<(std::ostream& os, const Journey& obj)
 	}
 	return os;
 }
-
+//! Reads inputs from the console to create a journey object
 std::istream& operator>>(std::istream& is, Journey& obj)
 {
 	delete[] obj.dest;
