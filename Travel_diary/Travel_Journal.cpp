@@ -14,19 +14,42 @@
 		std::ofstream ofs;
 		std::ifstream ifs;
 		std::ifstream ifs_diary;
+		
 		std::cout << "Type L to login as an existing user or R to register a new user" << std::endl;
-		std::cin.getline(input, 500);
-		char* fname = nullptr;
-		User currentuser;
-		if (input[0] == 'R') {
-			ofs.open("users.db", std::ios::app);
-			std::cin >> currentuser;
-			ofs << currentuser << std::endl;
-			ofs.close();
-			change_fname(fname, currentuser.getName());
-
-
+	retrycommand:
+		try {
+			std::cin.getline(input, 500);
+			if (strlen(input) != 1 || (input[0] != 'L' && input[0] != 'R')) {
+				throw std::invalid_argument("Invalid command");
+			}
 		}
+		catch (const std::invalid_argument& e) {
+			std::cerr << e.what()<<std::endl;
+			goto retrycommand;
+		}		
+			char* fname = nullptr;
+			User currentuser;
+			if (input[0] == 'R') {	
+			retryname:
+				try {
+					
+					std::cin >> currentuser;
+					ofs.open("users.db", std::ios::app);
+					if (!ofs.is_open()) { std::cout << "Problem opening users.txt."; return 1; }
+					ofs << currentuser << std::endl;
+					ofs.close();
+					change_fname(fname, currentuser.getName());
+				}
+				catch (const std::invalid_argument& e) {
+					std::cerr << e.what();
+					goto retryname;
+				}
+
+
+
+			}
+		
+		
 		else {
 			std::cout << "Enter username: ";
 			char uname[50];
@@ -54,10 +77,11 @@
 							change_fname(fname, currentuser.getName());
 						}
 						else {
-							throw "Wrong password!";
+							throw std::invalid_argument("Wrong password!");
 						}
 					}
 					else {
+						//the code for the ignore func is not mine and was taken from https://stackoverflow.com/questions/2581794/skip-lines-in-stdistream
 						ifs.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 						ifs.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					}
@@ -82,19 +106,36 @@
 			}
 
 		}
-
+			retrycommand2:
 		std::cout << "Type S to begin searching for a travel destinations, type C to create a travel diary listing or E to end program." << std::endl;
-		std::cin >> input[0];
-		std::cin.ignore();
+		try {
+			std::cin.getline(input, 500);
+			if (strlen(input) != 1 || (input[0] != 'S' && input[0] != 'C' && input[0] != 'E')) {
+				throw std::invalid_argument("Invalid command");
+			}
+		}
+		catch (const std::invalid_argument& e) {
+			std::cerr << e.what();
+			goto retrycommand2;
+		}
 		while (input[0] != 'E') {
 			switch (input[0]) {
 			case 'C': {
-				Journey inp;
-				std::cin >> inp;
-				ofs.open(fname, std::ios::app);
-				ofs << inp;
-				ofs.close();
-				break;
+			reenter_journal:
+				try {
+					
+					Journey inp;
+					std::cin >> inp;
+					ofs.open(fname, std::ios::app);
+					ofs << inp;
+					ofs.close();
+					break;
+				}
+				catch (const std::invalid_argument& e) {
+					std::cerr << e.what();
+					
+					goto reenter_journal;
+				}
 			}
 			case 'S': {
 				std::cout << "Enter destination to search: ";

@@ -1,5 +1,16 @@
 #include "Picture.h"
 
+void Picture::check_chars()
+{
+	for (size_t i = 0; i < size; i++)
+	{
+		if (name[i] == ';' || name[i] == ':' || name[i] == ',' || name[i] == '.' || name[i] == '!' || name[i] == ' ') // more checks for invalid characters can be made with the same code.
+		{
+			throw std::invalid_argument("Invalid characters in name");
+		}
+	}
+}
+
 Picture::Picture()
 {
 	name = new (std::nothrow) char[2];
@@ -51,7 +62,7 @@ std::istream& operator>>(std::istream& is,  Picture& object)
 {
 	delete[] object.name;
 	char buffer[50];
-	//std::cout << "Enter picture name: ";
+	
 	is.getline(buffer, 50);
 	
 	object.size = 0;
@@ -70,6 +81,9 @@ std::istream& operator>>(std::istream& is,  Picture& object)
 	if (i - object.size == 4) {
 		object.format = Format::jpeg;
 	}
-	else { object.format =Format::png; }
+	else if(i - object.size == 3) { object.format =Format::png; }
+	else {
+		throw std::invalid_argument("Invalid format!");
+	}
 	return is;
 }

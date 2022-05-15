@@ -8,73 +8,78 @@
 
 void Date::vali_date(const char* year, const char* month, const char* day)
 {
+	if (strlen(year) != 4 || strlen(month) != 2 || strlen(day) != 2) {
+		throw std::invalid_argument("Invalid format!");
+	}
 	int year_n = atoi(year);
 	int month_n = atoi(month);
 	int day_n = atoi(day);
 
 	if (year_n < 1000 || year_n > 9999) {
-		assert("Invalid year");
+		throw std::invalid_argument("Invalid year!");;
 	}
-	//look into validation
-	switch (month_n) {
-	case 1: {
-		if (day_n < 1 || day_n>31) { assert("Invalid day"); }
-		break;
-	}
-	case 2: {
-		if (year_n % 4 == 0) {
-			if (day_n < 1 || day_n > 29) { assert("Invalid day"); }
+	
+		switch (month_n) {
+		case 1: {
+			if (day_n < 1 || day_n>31) { throw std::invalid_argument("Invalid day!"); }
+			break;
 		}
-		else {
-			if (day_n < 1 || day_n > 28) { assert("Invalid day"); }
+		case 2: {
+			if (year_n % 4 == 0) {
+				if (day_n < 1 || day_n > 29) { throw std::invalid_argument("Invalid day!"); }
+			}
+			else {
+				if (day_n < 1 || day_n > 28) { throw std::invalid_argument("Invalid day!"); }
+			}
+			break;
 		}
-		break;
-	}
-	case 3: {
-		if (day_n < 1 || day_n>31) { assert("Invalid day"); }
-		break;
-	}
-	case 4: {
-		if (day_n < 1 || day_n>30) { assert("Invalid day"); }
-		break;
-	}
-	case 5:
-	{
-		if (day_n < 1 || day_n>31) { assert("Invalid day"); }
-		break;
-	}
-	case 6: {
-		if (day_n < 1 || day_n>30) { assert("Invalid day"); }
-		break;
-	}
-	case 7: {
-		if (day_n < 1 || day_n>31) { assert("Invalid day"); }
-		break;
-	}
-	case 8: {
-		if (day_n < 1 || day_n>31) { assert("Invalid day"); }
-		break;
-	}
-	case 9: {
-		if (day_n < 1 || day_n>30) { assert("Invalid day"); }
-		break;
-	}
-	case 10: {
-		if (day_n < 1 || day_n>31) { assert("Invalid day"); }
-		break;
-	}
-	case 11: {
-		if (day_n < 1 || day_n>30) { assert("Invalid day"); }
-		break;
-	}
-	case 12: {
-		if (day_n < 1 || day_n>31) { assert("Invalid day"); }
-		break;
-	}
-	default: {
-		assert("Invalid day");
-	}
-	}
+		case 3: {
+			if (day_n < 1 || day_n>31) { throw std::invalid_argument("Invalid day!"); }
+			break;
+		}
+		case 4: {
+			if (day_n < 1 || day_n>30) { throw std::invalid_argument("Invalid day!"); }
+			break;
+		}
+		case 5:
+		{
+			if (day_n < 1 || day_n>31) { throw std::invalid_argument("Invalid day!"); }
+			break;
+		}
+		case 6: {
+			if (day_n < 1 || day_n>30) { throw std::invalid_argument("Invalid day!"); }
+			break;
+		}
+		case 7: {
+			if (day_n < 1 || day_n>31) { throw std::invalid_argument("Invalid day!"); }
+			break;
+		}
+		case 8: {
+			if (day_n < 1 || day_n>31) { throw std::invalid_argument("Invalid day!"); }
+			break;
+		}
+		case 9: {
+			if (day_n < 1 || day_n>30) { throw std::invalid_argument("Invalid day!"); }
+			break;
+		}
+		case 10: {
+			if (day_n < 1 || day_n>31) { throw std::invalid_argument("Invalid day!"); }
+			break;
+		}
+		case 11: {
+			if (day_n < 1 || day_n>30) { throw std::invalid_argument("Invalid day!"); }
+			break;
+		}
+		case 12: {
+			if (day_n < 1 || day_n>31) { throw std::invalid_argument("Invalid day!"); }
+			break;
+		}
+		default: {
+			throw std::invalid_argument("Invalid month!");
+		}
+		}
+	
+	
 }
 
 Date::Date()
@@ -93,12 +98,7 @@ Date::Date(const char* year, const char* month, const char* day)
 	
 }
 
-Date::Date(const Date& other)
-{
-	strcpy(this->year, other.year);
-	strcpy(this->month, other.month);
-	strcpy(this->day, other.day);
-}
+
 
 bool Date::operator<(const Date& other) const
 {
@@ -141,7 +141,7 @@ std::ostream& operator<<(std::ostream& os, const Date& object)
 std::istream& operator>>(std::istream& is, Date& object)
 {
 	char buffer[50];
-	//std::cout << "Enter date: ";
+	
 	is.getline(buffer, 50);
 	int i = 0;	
 	while (buffer[i] != '-') {

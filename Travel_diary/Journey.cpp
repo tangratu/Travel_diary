@@ -57,9 +57,10 @@ std::ostream& operator<<(std::ostream& os, const Journey& obj)
 
 std::istream& operator>>(std::istream& is, Journey& obj)
 {
-	
+	delete[] obj.dest;
+	delete[] obj.pics;
 	char buffer1[50];
-	std::cout << "Enter destionation: ";
+	std::cout << "Enter destination: ";
 	is.getline(buffer1, 50);
 	obj.dest_s = strlen(buffer1);
 	obj.dest = new(std::nothrow)char[obj.dest_s + 1];
@@ -69,9 +70,15 @@ std::istream& operator>>(std::istream& is, Journey& obj)
 	is >> obj.sdate;
 	std::cout << "Enter end date: ";
 	is >> obj.edate;
+	if (obj.sdate > obj.edate) {
+		throw std::invalid_argument("Start date is after end date!");
+	}
 	std::cout << "Enter grade: ";
 	is >> obj.grade;
 	is.ignore();
+	if (obj.grade < 1 || obj.grade >5) {
+		throw std::invalid_argument("Invalid grade score!");
+	}
 	char buffer[500];
 	std::cout << "Type comment: ";
 	is.getline(buffer, 500);

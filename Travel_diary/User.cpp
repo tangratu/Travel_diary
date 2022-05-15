@@ -1,5 +1,16 @@
 #include "User.h"
 
+void User::check_chars()
+{
+	for (size_t i = 0; i < name_s; i++)
+	{
+		if (name[i] == ';' || name[i] == ':' || name[i] == ',' || name[i] == '.' || name[i] == '!' || name[i] == ' ') // more checks for invalid characters can be made with the same code.
+		{
+			throw std::invalid_argument("Invalid characters in name");
+		}
+	}
+}
+
 const char* User::getName()
 {
 	return this->name;
@@ -23,6 +34,7 @@ User::User()
 
 User::User(const char* name1, const char* pass1, const char* email1)
 {
+	
 	name_s = strlen(name1);
 	pass_s = strlen(pass1);
 	email_s = strlen(email1);
@@ -33,6 +45,7 @@ User::User(const char* name1, const char* pass1, const char* email1)
 	email = new (std::nothrow) char[email_s + 1];
 	assert(email);
 	strcpy(name, name1);
+	check_chars();
 	strcpy(pass, pass1);
 	strcpy(email, email1);
 }
@@ -82,6 +95,7 @@ std::istream& operator>>(std::istream& is, User& object)
 	object.name = new (std::nothrow) char[object.name_s + 1];
 	assert(object.name);
 	strcpy(object.name, buffer);
+	object.check_chars();
 	char buffer1[50];
 	std::cout << "Enter password: ";
 	is.getline(buffer1, 50);

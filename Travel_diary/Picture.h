@@ -8,6 +8,7 @@ private:
 	char* name;
 	size_t size;	
 	Format::type format;
+	void check_chars();
 public:
 	Picture();
 	Picture(const char* name1,  Format::type format1);

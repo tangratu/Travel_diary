@@ -10,6 +10,7 @@ private:
 	size_t pass_s;
 	char* email;
 	size_t email_s;
+	void check_chars();
 	
 public:
 	const char* getName();
