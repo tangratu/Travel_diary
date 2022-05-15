@@ -1,5 +1,6 @@
 #pragma once
 #include<sstream>
+#include <iostream>
 #include<cassert>
 class User {
 private:
@@ -11,6 +12,7 @@ private:
 	size_t email_s;
 	
 public:
+	const char* getName();
 	User();
 	User(const char* name1, const char* pass1, const char* email1);
 	~User();

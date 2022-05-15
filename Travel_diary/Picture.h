@@ -1,6 +1,7 @@
 #pragma once
 #include <sstream>
 #include <cassert>
+#include <iostream>
 #include "Format.cpp"
 class Picture {
 private:

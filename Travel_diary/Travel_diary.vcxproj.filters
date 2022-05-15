@@ -33,6 +33,9 @@
     <ClCompile Include="Journey.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Travel_Journal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Date.h">

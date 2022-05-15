@@ -141,6 +141,7 @@ std::ostream& operator<<(std::ostream& os, const Date& object)
 std::istream& operator>>(std::istream& is, Date& object)
 {
 	char buffer[50];
+	//std::cout << "Enter date: ";
 	is.getline(buffer, 50);
 	int i = 0;	
 	while (buffer[i] != '-') {

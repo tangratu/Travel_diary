@@ -1,7 +1,7 @@
 #pragma once
 #include <sstream>
 #include <cassert>
-
+#include <iostream>
 class Date {
 private:
 	char year[5];

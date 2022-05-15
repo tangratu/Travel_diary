@@ -51,6 +51,7 @@ std::istream& operator>>(std::istream& is,  Picture& object)
 {
 	delete[] object.name;
 	char buffer[50];
+	//std::cout << "Enter picture name: ";
 	is.getline(buffer, 50);
 	
 	object.size = 0;

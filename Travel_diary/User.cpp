@@ -1,5 +1,10 @@
 #include "User.h"
 
+const char* User::getName()
+{
+	return this->name;
+}
+
 User::User()
 {
 	name_s = 1;
@@ -61,7 +66,7 @@ User& User::operator=(const User& other)
 
 std::ostream& operator<<(std::ostream& os, const User& object)
 {
-	os << object.name;
+	os << object.name << std::endl << object.pass << std::endl << object.email;
 	return os;
 }
 
@@ -71,18 +76,21 @@ std::istream& operator>>(std::istream& is, User& object)
 	delete[] object.pass;
 	delete[] object.email;
 	char buffer[50];
+	std::cout << "Enter username: ";
 	is.getline(buffer, 50);
 	object.name_s = strlen(buffer);
 	object.name = new (std::nothrow) char[object.name_s + 1];
 	assert(object.name);
 	strcpy(object.name, buffer);
 	char buffer1[50];
+	std::cout << "Enter password: ";
 	is.getline(buffer1, 50);
 	object.pass_s = strlen(buffer1);
 	object.pass = new (std::nothrow) char[object.pass_s + 1];
 	assert(object.pass);
 	strcpy(object.pass, buffer1);
 	char buffer2[50];
+	std::cout << "Enter email: ";
 	is.getline(buffer2, 50);
 	object.email_s = strlen(buffer2);
 	object.email = new (std::nothrow) char[object.email_s + 1];
